@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информационный бизнес | Проект Семёна Рубашина</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at 10% 30%, #f3e9e0 0%, #e6d9cb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #1e2c3a;
+        }
+
+        .wrapper {
+            max-width: 1300px;
+            width: 100%;
+            background: rgba(255, 248, 242, 0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 64px;
+            padding: 30px;
+            box-shadow: 0 40px 70px -25px rgba(80, 50, 30, 0.35), 0 0 0 1px rgba(255, 235, 215, 0.6) inset;
+            border: 1px solid rgba(255, 245, 235, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        /* Главная страница */
+        .main-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .main-page h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, #b3541c, #9e6b3e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 0 4px 15px rgba(220, 120, 40, 0.3);
+        }
+
+        .main-page .subtitle {
+            font-size: 1.8rem;
+            color: #3a2e24;
+            margin-bottom: 40px;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 15px 40px;
+            border-radius: 80px;
+            backdrop-filter: blur(4px);
+            border: 1px solid #fff1e0;
+            box-shadow: 0 6px 14px rgba(140, 90, 50, 0.15);
+        }
+
+        .main-page .author {
+            font-size: 1.4rem;
+            color: #4a3a2c;
+            margin-bottom: 50px;
+            background: #ffffffcc;
+            padding: 12px 32px;
+            border-radius: 60px;
+            border: 1px solid #ffe4cf;
+            font-weight: 500;
+        }
+
+        .main-page .start-btn {
+            background: #dc7f42;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            padding: 25px 70px;
+            border-radius: 100px;
+            cursor: pointer;
+            box-shadow: 0 20px 40px #c96f34, 0 5px 0 #a05220 inset;
+            transition: all 0.2s ease;
+            border: 2px solid #ffb485;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        .main-page .start-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 28px 50px #b45f2e, 0 4px 0 #9c4d1f inset;
+            background: #ea8e4f;
+        }
+
+        .main-page .start-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 10px 25px #b45f2e, 0 2px 0 #9c4d1f inset;
+        }
+
+        .main-page .project-badge {
+            margin-top: 60px;
+            font-size: 1.2rem;
+            color: #6b5846;
+            background: #f0e4d8;
+            padding: 10px 30px;
+            border-radius: 60px;
+            border: 1px solid #ebcfb9;
+        }
+
+        /* Страница теста (скрыта изначально) */
+        .quiz-page {
+            display: none;
+        }
+
+        .quiz-page.visible {
+            display: block;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, #b3541c, #9e6b3e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 10px rgba(220, 120, 40, 0.2);
+        }
+
+        .header p {
+            background: #ffffffcc;
+            color: #3a2e24;
+            display: inline-block;
+            padding: 10px 36px;
+            border-radius: 80px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 8px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 6px 14px rgba(140, 90, 50, 0.15);
+            border: 1px solid #fff1e0;
+        }
+
+        .quest-card {
+            background: #ffffffd9;
+            backdrop-filter: blur(4px);
+            border-radius: 56px;
+            padding: 45px;
+            box-shadow: 0 25px 50px -20px #996b4d;
+            border: 1px solid #ffebdb;
+            transition: box-shadow 0.3s;
+        }
+
+        .quest-card:hover {
+            box-shadow: 0 30px 60px -18px #b47d5e;
+        }
+
+        .progress-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 35px;
+            background: #fcf3ea;
+            padding: 12px 20px;
+            border-radius: 60px;
+            border: 1px solid #ffdcc5;
+        }
+
+        .progress-bar-bg {
+            height: 10px;
+            background: #e9d6c8;
+            border-radius: 20px;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 10px;
+            width: 0%;
+            background: linear-gradient(90deg, #f5ac78, #d16827);
+            border-radius: 20px;
+            transition: width 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+        }
+
+        .question-counter {
+            background: #e2cfbd;
+            padding: 8px 22px;
+            border-radius: 60px;
+            font-weight: 700;
+            color: #442f20;
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        .question-text {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 35px;
+            color: #2c3f4e;
+            line-height: 1.3;
+            background: linear-gradient(135deg, #312e2b, #4d4239);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-bottom: 35px;
+        }
+
+        .option-btn {
+            background: #ffffff;
+            border: 2px solid #f2dfd1;
+            border-radius: 100px;
+            padding: 20px 18px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #2b3d4a;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            width: 100%;
+            line-height: 1.4;
+            word-break: break-word;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .option-btn .option-text {
+            flex: 1;
+            text-align: center;
+            white-space: normal;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: #fff9f2;
+            border-color: #cf9b70;
+            transform: translateY(-3px);
+            box-shadow: 0 16px 28px -10px #ba8b64;
+        }
+
+        .option-btn.selected {
+            background: #f3dccb;
+            border-color: #b16f3d;
+            box-shadow: 0 10px 20px -8px #b07044, 0 0 0 2px #f5cbaa inset;
+            color: #2b2b2b;
+            font-weight: 700;
+        }
+
+        .option-prefix {
+            background: #ac8a70;
+            color: white;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 6px #ab7f61;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        .nav-btn {
+            background: #ffffff;
+            border: 2px solid #dbbcA3;
+            padding: 16px 38px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #594432;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 5px 12px #e5cfbd;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #ffe9db;
+            border-color: #b27d58;
+            transform: scale(1.02);
+            box-shadow: 0 10px 22px -6px #ac7a55;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.4;
+            border-color: #bfb2a7;
+            box-shadow: none;
+            cursor: default;
+        }
+
+        .primary-btn {
+            background: #dc7f42;
+            border: none;
+            color: white;
+            box-shadow: 0 12px 28px #c96f34;
+        }
+
+        .primary-btn:hover:not(:disabled) {
+            background: #c4672b;
+        }
+
+        .result-block {
+            text-align: center;
+        }
+
+        .result-title {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, #9f5d2a, #cd7f42);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+        }
+
+        .profession-card {
+            background: #fdf7f1;
+            border-radius: 56px;
+            padding: 45px 35px;
+            border: 1px solid #ffe1cd;
+            margin: 20px 0 30px;
+            box-shadow: 0 25px 45px -20px #bb8b6b;
+        }
+
+        .prof-name {
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: #2e3e4b;
+            margin-bottom: 15px;
+        }
+
+        .prof-desc {
+            font-size: 1.3rem;
+            color: #3b4f5e;
+            margin: 20px 0 30px;
+            line-height: 1.5;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .format-stickers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: center;
+            margin: 30px 0 20px;
+        }
+
+        .format-sticker {
+            background: white;
+            border-radius: 60px;
+            padding: 12px 30px;
+            font-weight: 600;
+            box-shadow: 0 6px 16px #ebcfbc;
+            border: 1px solid #fcd4bb;
+            font-size: 1.1rem;
+            color: #4e3f35;
+        }
+
+        .restart-btn {
+            background: none;
+            border: 2px solid #d1945f;
+            padding: 18px 54px;
+            border-radius: 60px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #5c3c24;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: 0.2s;
+        }
+
+        .restart-btn:hover {
+            background: #fbe6d6;
+            border-color: #b46f3a;
+            transform: scale(1.02);
+        }
+
+        .back-to-main {
+            background: none;
+            border: 2px solid #b48b70;
+            padding: 12px 30px;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #5f4a38;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.2s;
+            display: inline-block;
+        }
+
+        .back-to-main:hover {
+            background: #eddaca;
+            border-color: #9e6b48;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .footer {
+            margin-top: 35px;
+            color: #7c6b5b;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        @media (max-width: 700px) {
+            .main-page h1 { font-size: 3rem; }
+            .main-page .start-btn { font-size: 1.5rem; padding: 20px 40px; }
+            .wrapper { padding: 15px; }
+            .quest-card { padding: 25px; }
+            .question-text { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper" id="appWrapper">
+    <!-- ГЛАВНАЯ СТРАНИЦА -->
+    <div id="mainPage" class="main-page">
+        <h1>Информационный<br>бизнес</h1>
+        <div class="subtitle">Найди своё призвание в мире знаний</div>
+        <div class="author">Автор проекта: <strong>Семён Рубашин</strong></div>
+        <button class="start-btn" id="startQuizBtn">🚀 Найти свою профессию</button>
+        <div class="project-badge">Школьный проект • 2026 • Инфобизнес</div>
+    </div>
+
+    <!-- СТРАНИЦА ТЕСТА (скрыта) -->
+    <div id="quizPage" class="quiz-page">
+        <div class="header">
+            <h1>🧭 ProfCompass</h1>
+            <p>найди свою профессию в инфобизнесе</p>
+        </div>
+        <div class="quest-card" id="questCard">
+            <!-- Экран вопросов -->
+            <div id="quizArea">
+                <div class="progress-area">
+                    <span style="font-size:1.5rem;">🔹</span>
+                    <div class="progress-bar-bg"><div class="progress-fill" id="progressFill"></div></div>
+                    <span class="question-counter" id="counterText">1/6</span>
+                </div>
+                <div class="question-text" id="questionText">...</div>
+                <div class="options-grid" id="optionsContainer"></div>
+                <div class="nav-buttons">
+                    <button class="nav-btn" id="prevBtn" disabled>← Назад</button>
+                    <button class="nav-btn primary-btn" id="nextBtn" disabled>Далее →</button>
+                </div>
+            </div>
+            <!-- Экран результата (профессия) -->
+            <div id="resultArea" class="result-block hidden">
+                <div class="result-title">✨ ваша профессия</div>
+                <div class="profession-card" id="professionCard"></div>
+                <button class="restart-btn" id="restartBtn">⟲ пройти заново</button>
+                <button class="back-to-main" id="backToMainBtn">← На главную</button>
+            </div>
+        </div>
+        <div class="footer">Школьный проект «Информационный бизнес» — Семён Рубашин</div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ----- ВОПРОСЫ (6 штук) -----
+        const questions = [
+            {
+                text: "1. Что вам больше нравится делать в свободное время?",
+                options: [
+                    { text: "Смотреть видео на YouTube и в TikTok", prof: { video: 2, marketing: 0, coach: 0, design: 0, text: 0, expert: 0, producer: 0 } },
+                    { text: "Читать книги и статьи, писать посты", prof: { text: 2, expert: 1, marketing: 0, video: 0, design: 0, coach: 0, producer: 0 } },
+                    { text: "Рисовать, фотографировать, создавать дизайн", prof: { design: 2, video: 1, marketing: 0, text: 0, coach: 0, expert: 0, producer: 0 } },
+                    { text: "Общаться с друзьями, помогать им советом", prof: { coach: 2, expert: 1, text: 0, video: 0, design: 0, marketing: 0, producer: 0 } },
+                    { text: "Изучать новое, узнавать про тренды и рекламу", prof: { marketing: 2, producer: 1, video: 0, design: 0, text: 0, coach: 0, expert: 0 } },
+                    { text: "Глубоко разбираться в интересной теме", prof: { expert: 3, text: 1, video: 0, design: 0, coach: 1, marketing: 0, producer: 0 } }
+                ]
+            },
+            {
+                text: "2. Какой контент вам интереснее всего создавать?",
+                options: [
+                    { text: "Короткие видео для соцсетей", prof: { video: 2, marketing: 1, design: 0, text: 0, coach: 0, expert: 0, producer: 0 } },
+                    { text: "Обучающие ролики и вебинары", prof: { video: 2, coach: 1, expert: 1, text: 0, design: 0, marketing: 0, producer: 0 } },
+                    { text: "Тексты: статьи, посты, сценарии", prof: { text: 3, expert: 1, marketing: 0, video: 0, design: 0, coach: 0, producer: 0 } },
+                    { text: "Графика, обложки, презентации", prof: { design: 3, video: 1, text: 0, marketing: 0, coach: 0, expert: 0, producer: 0 } },
+                    { text: "Живые эфиры, подкасты, общение", prof: { coach: 2, expert: 1, video: 1, text: 0, design: 0, marketing: 0, producer: 0 } },
+                    { text: "Планирование и координация команды", prof: { producer: 3, marketing: 2, video: 0, design: 0, text: 0, coach: 1, expert: 0 } }
+                ]
+            },
+            {
+                text: "3. Какая задача кажется вам самой интересной?",
+                options: [
+                    { text: "Научить других тому, что умею сам", prof: { coach: 2, expert: 2, video: 0, text: 0, design: 0, marketing: 0, producer: 0 } },
+                    { text: "Создавать красивые картинки и макеты", prof: { design: 3, video: 0, text: 0, marketing: 0, coach: 0, expert: 0, producer: 0 } },
+                    { text: "Писать интересные и полезные тексты", prof: { text: 3, expert: 1, marketing: 0, video: 0, design: 0, coach: 0, producer: 0 } },
+                    { text: "Снимать и монтировать видео", prof: { video: 3, design: 1, text: 0, marketing: 0, coach: 0, expert: 0, producer: 0 } },
+                    { text: "Продвигать продукты и придумывать рекламу", prof: { marketing: 3, producer: 1, video: 0, text: 1, design: 0, coach: 0, expert: 0 } },
+                    { text: "Управлять проектами и людьми", prof: { producer: 3, marketing: 1, coach: 1, video: 0, design: 0, text: 0, expert: 0 } }
+                ]
+            },
+            {
+                text: "4. Какими программами вам нравится пользоваться?",
+                options: [
+                    { text: "Photoshop, Figma, Canva", prof: { design: 3, video: 0, marketing: 0, text: 0, coach: 0, expert: 0, producer: 0 } },
+                    { text: "CapCut, DaVinci Resolve, редакторы видео", prof: { video: 3, design: 1, marketing: 0, text: 0, coach: 0, expert: 0, producer: 0 } },
+                    { text: "Google Docs, Notion, Word", prof: { text: 2, expert: 1, producer: 1, marketing: 0, video: 0, design: 0, coach: 0 } },
+                    { text: "Telegram, Zoom, чаты", prof: { coach: 2, producer: 1, video: 0, text: 0, design: 0, marketing: 0, expert: 0 } },
+                    { text: "Рекламные кабинеты, Excel, аналитика", prof: { marketing: 3, producer: 1, video: 0, text: 0, design: 0, coach: 0, expert: 0 } },
+                    { text: "Базы знаний, энциклопедии, учебники", prof: { expert: 3, text: 1, video: 0, design: 0, coach: 0, marketing: 0, producer: 0 } }
+                ]
+            },
+            {
+                text: "5. Как вы предпочитаете работать?",
+                options: [
+                    { text: "В кадре, на публику, вести трансляции", prof: { video: 2, coach: 2, expert: 1, marketing: 0, design: 0, text: 0, producer: 0 } },
+                    { text: "С текстами, в тишине и спокойствии", prof: { text: 3, expert: 1, marketing: 0, video: 0, design: 0, coach: 0, producer: 0 } },
+                    { text: "Над визуалом, эстетикой, деталями", prof: { design: 3, video: 1, text: 0, marketing: 0, coach: 0, expert: 0, producer: 0 } },
+                    { text: "В команде, общаться и координировать", prof: { producer: 2, coach: 2, marketing: 1, text: 0, video: 0, design: 0, expert: 0 } },
+                    { text: "С цифрами, стратегиями, планами", prof: { marketing: 3, producer: 2, video: 0, text: 0, design: 0, coach: 0, expert: 0 } },
+                    { text: "Исследовать, анализировать, систематизировать", prof: { expert: 3, text: 1, marketing: 1, video: 0, design: 0, coach: 0, producer: 0 } }
+                ]
+            },
+            {
+                text: "6. Что бы вы хотели создавать в инфобизнесе?",
+                options: [
+                    { text: "Обучающие видеокурсы и вебинары", prof: { video: 2, coach: 1, expert: 2, text: 0, design: 0, marketing: 0, producer: 0 } },
+                    { text: "Полезные статьи, рассылки, блоги", prof: { text: 3, expert: 1, marketing: 0, video: 0, design: 0, coach: 0, producer: 0 } },
+                    { text: "Визуальный контент: обложки, презентации", prof: { design: 3, video: 1, text: 0, marketing: 0, coach: 0, expert: 0, producer: 0 } },
+                    { text: "Личный бренд и наставничество", prof: { coach: 3, expert: 1, video: 1, text: 1, design: 0, marketing: 0, producer: 0 } },
+                    { text: "Рекламные кампании и продажи", prof: { marketing: 3, producer: 1, video: 0, text: 0, design: 0, coach: 0, expert: 0 } },
+                    { text: "Целые проекты: от идеи до запуска", prof: { producer: 3, marketing: 2, coach: 1, video: 0, design: 0, text: 1, expert: 0 } }
+                ]
+            }
+        ];
+
+        // ------ ПРОФЕССИИ (7 штук) -----
+        const professions = [
+            {
+                key: "video",
+                name: "🎥 Видеопродюсер / режиссёр монтажа",
+                description: "Вы создаёте обучающие ролики, вебинары, короткие шоу. Работа с кадром, светом, монтажом. Эксперты доверяют вам упаковку своего видеоконтента.",
+                formats: ["Вебинары", "Видеоуроки", "Reels", "Стримы"]
+            },
+            {
+                key: "text",
+                name: "✍️ Копирайтер / редактор",
+                description: "Пишете статьи, посты, рассылки, сценарии. Помогаете экспертам формулировать мысли и продавать текстом. Властелин слов и смыслов.",
+                formats: ["Статьи", "Email-рассылки", "Посты", "Книги"]
+            },
+            {
+                key: "design",
+                name: "🖌️ Дизайнер визуальных решений",
+                description: "Отвечаете за обложки, презентации, графику для соцсетей, фирменный стиль эксперта. Через красоту повышаете ценность программ.",
+                formats: ["Презентации", "Обложки", "Гайды", "Инфографика"]
+            },
+            {
+                key: "coach",
+                name: "🧑‍🏫 Наставник / онлайн-коуч",
+                description: "Ваша стихия — живое общение, мотивация, групповая работа. Вы ведёте за собой, проводите мастермайнды, поддерживаете учеников.",
+                formats: ["Живые вебинары", "Групповые встречи", "Чат поддержки", "Коуч-сессии"]
+            },
+            {
+                key: "marketing",
+                name: "📈 Маркетолог / продюсер инфопродуктов",
+                description: "Стратег, который упаковывает знания в продукт, настраивает рекламу, ищет партнёров и запускает курсы. Отвечаете за прибыль проекта.",
+                formats: ["Запуски", "Таргет", "Аналитика", "Тексты для рассылок"]
+            },
+            {
+                key: "expert",
+                name: "🧠 Эксперт / предметник",
+                description: "Вы — кладезь знаний в своей области. Глубоко разбираетесь в теме, проводите исследования, пишете экспертные материалы и учите других системно мыслить.",
+                formats: ["Глубокие курсы", "Исследования", "Лонгриды", "Интервью"]
+            },
+            {
+                key: "producer",
+                name: "🎬 Продюсер / руководитель проектов",
+                description: "Вы соединяете всё воедино: находите экспертов, ставите задачи, контролируете сроки и качество. Именно благодаря вам проекты выходят в свет.",
+                formats: ["Управление", "Стратегии", "Продюсирование", "Координация"]
+            }
+        ];
+
+        // Элементы страниц
+        const mainPage = document.getElementById('mainPage');
+        const quizPage = document.getElementById('quizPage');
+        const startBtn = document.getElementById('startQuizBtn');
+        const backToMainBtn = document.getElementById('backToMainBtn');
+
+        // Элементы теста
+        const quizArea = document.getElementById('quizArea');
+        const resultArea = document.getElementById('resultArea');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressFill = document.getElementById('progressFill');
+        const counterText = document.getElementById('counterText');
+        const professionCard = document.getElementById('professionCard');
+        const restartBtn = document.getElementById('restartBtn');
+
+        // Состояние теста
+        let currentIdx = 0;
+        const totalQ = questions.length;
+        let selected = new Array(totalQ).fill(null);
+        let profScores = {
+            video: 0, text: 0, design: 0, coach: 0, marketing: 0, expert: 0, producer: 0
+        };
+
+        // Переключение на главную
+        function showMainPage() {
+            mainPage.style.display = 'flex';
+            quizPage.classList.remove('visible');
+        }
+
+        // Переключение на тест
+        function showQuizPage() {
+            mainPage.style.display = 'none';
+            quizPage.classList.add('visible');
+            restart(); // сброс теста при открытии
+        }
+
+        startBtn.addEventListener('click', showQuizPage);
+        backToMainBtn.addEventListener('click', showMainPage);
+
+        // Функции теста
+        function recalcScores() {
+            for (let k in profScores) profScores[k] = 0;
+            for (let i = 0; i < selected.length; i++) {
+                const ansIdx = selected[i];
+                if (ansIdx !== null && i < questions.length) {
+                    const opt = questions[i].options[ansIdx];
+                    if (opt && opt.prof) {
+                        for (let [p, val] of Object.entries(opt.prof)) {
+                            if (profScores.hasOwnProperty(p)) {
+                                profScores[p] += val;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        function renderQuestion() {
+            const q = questions[currentIdx];
+            questionText.innerText = q.text;
+
+            let html = '';
+            q.options.forEach((opt, optIndex) => {
+                const isSel = (selected[currentIdx] === optIndex);
+                const selClass = isSel ? 'selected' : '';
+                html += `
+                    <div class="option-btn ${selClass}" data-opt-index="${optIndex}">
+                        <span class="option-prefix">${String.fromCharCode(65 + optIndex)}</span>
+                        <span class="option-text">${opt.text}</span>
+                    </div>
+                `;
+            });
+            optionsContainer.innerHTML = html;
+
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const optIdx = parseInt(btn.dataset.optIndex);
+                    if (selected[currentIdx] !== optIdx) {
+                        selected[currentIdx] = optIdx;
+                        recalcScores();
+                        renderQuestion();
+                    }
+                });
+            });
+
+            const percent = ((currentIdx + 1) / totalQ) * 100;
+            progressFill.style.width = percent + '%';
+            counterText.innerText = (currentIdx + 1) + '/' + totalQ;
+
+            prevBtn.disabled = (currentIdx === 0);
+            nextBtn.disabled = (selected[currentIdx] === null);
+            nextBtn.innerHTML = (currentIdx === totalQ - 1) ? '🏁 К профессии →' : 'Далее →';
+        }
+
+        function showProfession() {
+            quizArea.classList.add('hidden');
+            resultArea.classList.remove('hidden');
+
+            let maxKey = 'video';
+            let maxValue = -1;
+            for (let [key, val] of Object.entries(profScores)) {
+                if (val > maxValue) {
+                    maxValue = val;
+                    maxKey = key;
+                }
+            }
+
+            const prof = professions.find(p => p.key === maxKey) || professions[0];
+
+            professionCard.innerHTML = `
+                <div class="prof-name">${prof.name}</div>
+                <div class="prof-desc">${prof.description}</div>
+                <div class="format-stickers">
+                    ${prof.formats.map(f => `<span class="format-sticker">${f}</span>`).join('')}
+                </div>
+                <div style="margin-top:30px; background:#f4e3d6; border-radius:80px; padding:20px; color:#4e3f35; font-weight:500;">
+                    ⚡ Рекомендованные форматы: вебинары, видеоуроки, текстовые материалы
+                </div>
+            `;
+        }
+
+        function restart() {
+            currentIdx = 0;
+            selected = new Array(totalQ).fill(null);
+            profScores = { video:0, text:0, design:0, coach:0, marketing:0, expert:0, producer:0 };
+            quizArea.classList.remove('hidden');
+            resultArea.classList.add('hidden');
+            renderQuestion();
+        }
+
+        prevBtn.addEventListener('click', () => { if (currentIdx > 0) { currentIdx--; renderQuestion(); } });
+        nextBtn.addEventListener('click', () => {
+            if (nextBtn.disabled) return;
+            if (currentIdx === totalQ - 1) showProfession();
+            else { currentIdx++; renderQuestion(); }
+        });
+        restartBtn.addEventListener('click', restart);
+
+        // Показываем главную страницу при загрузке
+        showMainPage();
+    })();
+</script>
+</body>
+</html>
